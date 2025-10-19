@@ -1,5 +1,5 @@
 // Comprehensive API test script for Menu Management Backend
-const BASE_URL = 'http://localhost:5000/api'
+const BASE_URL = `http://localhost:${process.env.PORT || 3000}`
 
 // Helper function to make API calls
 const apiCall = async (method, endpoint, data = null) => {

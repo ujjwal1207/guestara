@@ -2,6 +2,36 @@
 
 A comprehensive Node.js backend server for restaurant menu management with categories, subcategories, and items. Built with Express.js and MongoDB.
 
+## 🎥 Demo Video
+
+Watch the complete API demonstration: [Loom Video - Menu Management API Demo](https://www.loom.com/share/650cb1cf83324fd78e34010299ec6a5f?sid=87fe5c21-de3b-4262-a5f4-d735480c5c5d)
+
+
+## 🧠 Learning Reflections
+
+### 🗄️ Database Choice
+- Chose **MongoDB + Mongoose** for its natural fit with hierarchical data (Category → SubCategory → Item).
+- Highlight: Simplifies parent-child modeling versus relational joins.
+
+### ✅ 3 Things I Learned
+1. **Hierarchical data handling** with consistent relationships and APIs.
+2. **Search with partial matching** integrated cleanly across routes.
+3. **Inheritance and derived fields**, including tax defaults and `totalAmount` calculations with validation.
+
+### 🔥 Most Difficult Part
+- **Inheritance**: Defaulting tax from category while allowing overrides at subcategory and item levels.
+- **Derived fields**: Recomputing `totalAmount = baseAmount - discount` on create/update and preventing invalid values.
+- **Queries**: Efficient name search and relation filters with clean `populate` usage.
+
+> Highlight: Balancing flexibility (overrides) with correctness (validation + recalculation) was the toughest tradeoff.
+
+### 🔄 What I Would Do Differently
+- Add **advanced search/filtering** and **pagination** for large datasets.
+- Implement **authentication/authorization** with roles.
+- Invest in **automated tests** (unit/integration) for reliability.
+- Explore **query optimization** and **indexes** for performance.
+
+---
 ## 🚀 Features
 
 - **Category Management**: Create, read, and update menu categories
@@ -43,7 +73,7 @@ Update the `.env` file with your configuration:
 PORT=3000
 
 # Database Configuration
-MONGO_URI=mongodb+srv://sharmaujjwal2019:Ujjwal123@ujjwaldatabase.zraibfy.mongodb.net/menu-management?retryWrites=true&w=majority&appName=Ujjwaldatabase
+MONGO_URI=
 
 # Environment
 NODE_ENV=production
@@ -473,3 +503,6 @@ This project is licensed under the ISC License.
 **Created for Node.js Backend Internship Assignment**
 
 For any questions or issues, please contact the development team.
+
+---
+

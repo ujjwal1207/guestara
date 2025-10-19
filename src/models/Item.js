@@ -53,7 +53,11 @@ const itemSchema = new mongoose.Schema(
       min: [0, 'Discount cannot be negative'],
       validate: {
         validator: function (discount) {
-          return discount <= this.baseAmount
+          // Only validate if both discount and baseAmount are available
+          if (this.baseAmount !== undefined && discount !== undefined) {
+            return discount <= this.baseAmount
+          }
+          return true // Skip validation if baseAmount is not available
         },
         message: 'Discount cannot be greater than base amount'
       }
@@ -91,12 +95,28 @@ itemSchema.pre('save', function (next) {
 })
 
 // Pre-update middleware to recalculate total amount
-itemSchema.pre('findOneAndUpdate', function (next) {
+itemSchema.pre('findOneAndUpdate', async function (next) {
   const update = this.getUpdate()
   if (update.baseAmount !== undefined || update.discount !== undefined) {
-    const baseAmount = update.baseAmount || this.baseAmount
-    const discount = update.discount || this.discount
-    update.totalAmount = baseAmount - discount
+    // Get the current document to access existing values
+    const currentDoc = await this.model.findOne(this.getQuery())
+    if (currentDoc) {
+      const baseAmount =
+        update.baseAmount !== undefined
+          ? update.baseAmount
+          : currentDoc.baseAmount
+      const discount =
+        update.discount !== undefined ? update.discount : currentDoc.discount
+
+      // Validate discount doesn't exceed baseAmount
+      if (discount > baseAmount) {
+        const error = new Error('Discount cannot be greater than base amount')
+        error.name = 'ValidationError'
+        return next(error)
+      }
+
+      update.totalAmount = baseAmount - discount
+    }
   }
   next()
 })
