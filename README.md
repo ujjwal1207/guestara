@@ -10,26 +10,21 @@ Watch the complete API demonstration: [Loom Video - Menu Management API Demo](ht
 ## 🧠 Learning Reflections
 
 ### 🗄️ Database Choice
-- Chose **MongoDB + Mongoose** for its natural fit with hierarchical data (Category → SubCategory → Item).
-- Highlight: Simplifies parent-child modeling versus relational joins.
+I used MongoDB because it naturally supports hierarchical parent-child structures, which fits perfectly for categories, subcategories, and items. It integrates easily with Node.js using Mongoose. Using PostgreSQL or another relational DB would have required multiple tables and complex joins.
 
 ### ✅ 3 Things I Learned
-1. **Hierarchical data handling** with consistent relationships and APIs.
-2. **Search with partial matching** integrated cleanly across routes.
-3. **Inheritance and derived fields**, including tax defaults and `totalAmount` calculations with validation.
+1. Working with hierarchical data structures (category → subcategory → items) more rigorously, ensuring consistency and proper relationships throughout the APIs.
+2. Implementing search functionality with flexible partial matches — something I'd done before, but not this deeply integrated in a structured backend.
+3. Handling inheritance and derived fields like tax defaults and totalAmount calculations, along with clean validation logic across entities.
 
 ### 🔥 Most Difficult Part
-- **Inheritance**: Defaulting tax from category while allowing overrides at subcategory and item levels.
-- **Derived fields**: Recomputing `totalAmount = baseAmount - discount` on create/update and preventing invalid values.
-- **Queries**: Efficient name search and relation filters with clean `populate` usage.
+The most challenging part was handling inheritance and derived fields correctly:
+- **Inheritance**: Defaulting tax fields from the category while allowing subcategories and items to override them.
+- **Derived fields**: Recalculating totalAmount automatically on updates and preventing invalid values.
+- **Queries**: Implementing efficient searches by name and relation filters, keeping the populate logic clean and performant.
 
-> Highlight: Balancing flexibility (overrides) with correctness (validation + recalculation) was the toughest tradeoff.
-
-### 🔄 What I Would Do Differently
-- Add **advanced search/filtering** and **pagination** for large datasets.
-- Implement **authentication/authorization** with roles.
-- Invest in **automated tests** (unit/integration) for reliability.
-- Explore **query optimization** and **indexes** for performance.
+### 🔄 What I Would Have Done Differently
+Given more time, I would improve search and filter functionality, add authentication and role-based access, implement pagination and query optimization, and set up automated testing for better reliability and maintainability.
 
 ---
 ## 🚀 Features
