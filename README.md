@@ -7,6 +7,9 @@ A comprehensive Node.js backend server for restaurant menu management with categ
 Watch the complete API demonstration: [Loom Video - Menu Management API Demo](https://www.loom.com/share/650cb1cf83324fd78e34010299ec6a5f?sid=87fe5c21-de3b-4262-a5f4-d735480c5c5d)
 
 
+## Live link 
+https://guestara-ujjwal.onrender.com
+
 ## 🧠 Learning Reflections
 
 ### 🗄️ Database Choice
